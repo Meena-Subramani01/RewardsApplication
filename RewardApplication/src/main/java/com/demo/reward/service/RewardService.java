@@ -1,9 +1,12 @@
 package com.demo.reward.service;
 
-import java.util.Map;
+import java.time.LocalDate;
+
+
+import com.demo.reward.dto.RewardResponse;
 
 public interface RewardService {
 	
-	public Map<String, Object> getRewards(Long customerId);
+	public RewardResponse getRewards(LocalDate stratDate, LocalDate endDate);
 
 }

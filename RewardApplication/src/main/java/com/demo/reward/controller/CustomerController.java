@@ -15,7 +15,7 @@ import com.demo.reward.entity.Customer;
 import com.demo.reward.service.CustomerService;
 
 @RestController
-@RequestMapping("/api/customers")
+@RequestMapping("/api/v1/customers")
 public class CustomerController {
 	
 	private final CustomerService customerService;

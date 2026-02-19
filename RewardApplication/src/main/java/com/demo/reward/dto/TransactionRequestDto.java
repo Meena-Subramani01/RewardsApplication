@@ -1,11 +1,12 @@
 package com.demo.reward.dto;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 public class TransactionRequestDto {
 	
 	private Long customerId;
-	private Double amount;
+	private BigDecimal amount;
 	private LocalDate transactionDate;
 	public Long getCustomerId() {
 		return customerId;
@@ -13,10 +14,10 @@ public class TransactionRequestDto {
 	public void setCustomerId(Long customerId) {
 		this.customerId = customerId;
 	}
-	public Double getAmount() {
+	public BigDecimal getAmount() {
 		return amount;
 	}
-	public void setAmount(Double amount) {
+	public void setAmount(BigDecimal amount) {
 		this.amount = amount;
 	}
 	public LocalDate getTransactionDate() {

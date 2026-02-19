@@ -1,5 +1,6 @@
 package com.demo.reward.entity;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 import jakarta.persistence.Entity;
@@ -18,7 +19,7 @@ public class Transaction {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long transactionId;
 	
-	private Double amount;
+	private BigDecimal amount;
 	
 	private LocalDate transactionDate;
 	
@@ -30,7 +31,7 @@ public class Transaction {
 		
 	}
 
-	public Transaction(Long transactionId, Double amount, LocalDate transactionDate, Customer customer) {
+	public Transaction(Long transactionId, BigDecimal amount, LocalDate transactionDate, Customer customer) {
 		super();
 		this.transactionId = transactionId;
 		this.amount = amount;
@@ -46,11 +47,11 @@ public class Transaction {
 		this.transactionId = transactionId;
 	}
 
-	public Double getAmount() {
+	public BigDecimal getAmount() {
 		return amount;
 	}
 
-	public void setAmount(Double amount) {
+	public void setAmount(BigDecimal amount) {
 		this.amount = amount;
 	}
 

@@ -1,15 +1,20 @@
 package com.demo.reward.service;
 
-import java.time.Month;
-import java.util.LinkedHashMap;
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.demo.reward.dto.CustomerRewardResponse;
+import com.demo.reward.dto.RewardResponse;
 import com.demo.reward.entity.Customer;
 import com.demo.reward.entity.Transaction;
+import com.demo.reward.exception.InvalidDateException;
 import com.demo.reward.repository.TransactionRepository;
 
 @Service
@@ -27,39 +32,59 @@ public class RewardServiceImpl implements RewardService{
 	}
 	
 	@Override
-	public Map<String, Object> getRewards(Long customerId) {
-		Customer customer = customerService.getCustomer(customerId);
-		List<Transaction> transactionList = transactionRepository.findByCustomer(customer);
-		Map<Month, Integer> monthlyRewards = new LinkedHashMap<>();
-		int totalRewards = 0;
+	public RewardResponse getRewards(LocalDate stratDate, LocalDate endDate) {
+		validateDate(stratDate, endDate);
 		
-		for(Transaction t : transactionList) {
-			int points = calculatePoints(t.getAmount());
-			Month month = t.getTransactionDate().getMonth();
-			
-			monthlyRewards.put(month, 
-					monthlyRewards.getOrDefault(month, 0)+points);
-			totalRewards +=points;
-		}
-		Map<String, Object> response = new LinkedHashMap<>();
-		response.put("customerId", customerId);
-		response.put("monthlyRewards", monthlyRewards);
-		response.put("totalRewards", totalRewards);
+		List<Transaction> transactionList = transactionRepository.findByTransactionDateBetween(stratDate, endDate);
+		Map<Customer, List<Transaction>> customerGroup = transactionList.stream()
+							.collect(Collectors.groupingBy(Transaction::getCustomer));
 		
-		return response;
+		List<CustomerRewardResponse> response = customerGroup.entrySet()
+					.stream().map(entry -> calculateCustomerRewards(entry.getKey(), 
+									entry.getValue())).toList();
+		
+		
+		
+		return new RewardResponse(response);
 	}
 	
-	private int calculatePoints(double amount) {
-		int points =0;
-		if(amount >100) {
-			points +=(amount-100)*2;
-			amount=100;
+	private void validateDate(LocalDate startDate, LocalDate endDate) {
+		if(startDate.isAfter(endDate)) {
+			throw new InvalidDateException("Start date cannot be after end date");
 		}
-		if(amount >50) {
-			points+=(amount-50);
+		if(ChronoUnit.MONTHS.between(startDate, endDate) >3) {
+			throw new InvalidDateException("Date range cannot exceed 3 months");
 		}
+	}
+	
+	
+	private CustomerRewardResponse calculateCustomerRewards(Customer customer, 
+					List<Transaction> transactionList) {
+		Map<String, BigDecimal> monthly = transactionList.stream()
+						.collect(Collectors.groupingBy(
+								t -> t.getTransactionDate().getMonth().name(),
+								Collectors.mapping(t -> calculatePoints(t.getAmount()), 
+										Collectors.reducing(BigDecimal.ZERO, BigDecimal::add)
+										)));
+		BigDecimal total = monthly.values().stream().reduce(BigDecimal.ZERO, BigDecimal::add);
+		return new CustomerRewardResponse(customer.getCustomerId(), customer.getCustomerName(),
+				monthly, total);
 		
+	}
+	
+	private BigDecimal calculatePoints(BigDecimal amount) {
+		BigDecimal points = BigDecimal.ZERO;
+		
+		if(amount.compareTo(BigDecimal.valueOf(100))>0) {
+			points = points.add(amount.subtract(BigDecimal.valueOf(100)))
+					.multiply(BigDecimal.valueOf(2));
+			points = points.add(BigDecimal.valueOf(50));
+		}
+		else if(amount.compareTo(BigDecimal.valueOf(50)) >0) {
+			points = points.add(amount.subtract(BigDecimal.valueOf(50)));
+		}
 		return points;
 	}
+
 	
 }
