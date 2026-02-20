@@ -7,10 +7,10 @@ public class CustomerRewardResponse {
 	
 	private Long customerId;
 	private String customerName;
-	private Map<String, BigDecimal> monthlyRewards;
-	private BigDecimal totalRewards;
+	private Map<String, Double> monthlyRewards;
+	private Double totalRewards;
 	
-	public CustomerRewardResponse(Long customerId, String customerName,Map<String, BigDecimal> monthlyRewards, BigDecimal totalRewards) {
+	public CustomerRewardResponse(Long customerId, String customerName,Map<String, Double> monthlyRewards, Double totalRewards) {
 		super();
 		this.customerId = customerId;
 		this.customerName = customerName;
@@ -26,19 +26,19 @@ public class CustomerRewardResponse {
 		this.customerId = customerId;
 	}
 
-	public Map<String, BigDecimal> getMonthlyRewards() {
+	public Map<String, Double> getMonthlyRewards() {
 		return monthlyRewards;
 	}
 
-	public void setMonthlyRewards(Map<String, BigDecimal> monthlyRewards) {
+	public void setMonthlyRewards(Map<String, Double> monthlyRewards) {
 		this.monthlyRewards = monthlyRewards;
 	}
 
-	public BigDecimal getTotalRewards() {
+	public Double getTotalRewards() {
 		return totalRewards;
 	}
 
-	public void setTotalRewards(BigDecimal totalRewards) {
+	public void setTotalRewards(Double totalRewards) {
 		this.totalRewards = totalRewards;
 	}
 	

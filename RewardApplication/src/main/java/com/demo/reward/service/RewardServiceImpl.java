@@ -15,6 +15,7 @@ import com.demo.reward.dto.RewardResponse;
 import com.demo.reward.entity.Customer;
 import com.demo.reward.entity.Transaction;
 import com.demo.reward.exception.InvalidDateException;
+import com.demo.reward.exception.TransactionNotFoundException;
 import com.demo.reward.repository.TransactionRepository;
 
 @Service
@@ -36,6 +37,9 @@ public class RewardServiceImpl implements RewardService{
 		validateDate(stratDate, endDate);
 		
 		List<Transaction> transactionList = transactionRepository.findByTransactionDateBetween(stratDate, endDate);
+		if (transactionList.isEmpty()) {
+            throw new TransactionNotFoundException("No transactions found");
+        }
 		Map<Customer, List<Transaction>> customerGroup = transactionList.stream()
 							.collect(Collectors.groupingBy(Transaction::getCustomer));
 		
@@ -60,28 +64,28 @@ public class RewardServiceImpl implements RewardService{
 	
 	private CustomerRewardResponse calculateCustomerRewards(Customer customer, 
 					List<Transaction> transactionList) {
-		Map<String, BigDecimal> monthly = transactionList.stream()
+		Map<String, Double> monthly = transactionList.stream()
 						.collect(Collectors.groupingBy(
 								t -> t.getTransactionDate().getMonth().name(),
-								Collectors.mapping(t -> calculatePoints(t.getAmount()), 
-										Collectors.reducing(BigDecimal.ZERO, BigDecimal::add)
-										)));
-		BigDecimal total = monthly.values().stream().reduce(BigDecimal.ZERO, BigDecimal::add);
+								Collectors.summingDouble(t ->calculatePoints(t.getAmount()))
+								));
+		Double total = monthly.values().stream().mapToDouble(Double::doubleValue).sum();
 		return new CustomerRewardResponse(customer.getCustomerId(), customer.getCustomerName(),
 				monthly, total);
 		
 	}
 	
-	private BigDecimal calculatePoints(BigDecimal amount) {
-		BigDecimal points = BigDecimal.ZERO;
+	private double calculatePoints(BigDecimal amount) {
+		double amt = amount.doubleValue();
+		double points=0;
 		
-		if(amount.compareTo(BigDecimal.valueOf(100))>0) {
-			points = points.add(amount.subtract(BigDecimal.valueOf(100)))
-					.multiply(BigDecimal.valueOf(2));
-			points = points.add(BigDecimal.valueOf(50));
+		if(amt > 100) {
+			points += (amt-100)*2;
+			amt =100;
+			
 		}
-		else if(amount.compareTo(BigDecimal.valueOf(50)) >0) {
-			points = points.add(amount.subtract(BigDecimal.valueOf(50)));
+		if(amt >50) {
+			points += (amt-50);
 		}
 		return points;
 	}

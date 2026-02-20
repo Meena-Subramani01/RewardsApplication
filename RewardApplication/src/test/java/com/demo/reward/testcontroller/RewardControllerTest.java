@@ -38,15 +38,15 @@ public class RewardControllerTest {
 	@Test
 	void returnRewardSuccessfully() throws Exception {
 
-	    Map<String, BigDecimal> monthly = new HashMap<>();
-	    monthly.put("JANUARY", BigDecimal.valueOf(90));
+	    Map<String, Double> monthly = new HashMap<>();
+	    monthly.put("JANUARY", (double) 90);
 
 	    CustomerRewardResponse customerReward =
 	            new CustomerRewardResponse(
 	                    1L,
 	                    "Meena",
 	                    monthly,
-	                    BigDecimal.valueOf(90)
+	                    (double) 90
 	            );
 
 	    

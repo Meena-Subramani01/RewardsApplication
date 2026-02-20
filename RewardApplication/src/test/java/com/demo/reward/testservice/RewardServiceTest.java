@@ -49,7 +49,7 @@ class RewardsServiceTest {
                         LocalDate.of(2025,1,1),
                         LocalDate.of(2025,3,1));
 
-        assertEquals(BigDecimal.valueOf(90),
+        assertEquals(90,
                 response.getCustomerResponse().get(0).getTotalRewards());
     }
 
@@ -75,7 +75,7 @@ class RewardsServiceTest {
                         LocalDate.of(2025,1,1),
                         LocalDate.of(2025,3,1));
 
-        assertEquals(BigDecimal.valueOf(25),
+        assertEquals(25,
                 response.getCustomerResponse().get(0).getTotalRewards());
     }
 
@@ -101,7 +101,7 @@ class RewardsServiceTest {
                         LocalDate.of(2025,1,1),
                         LocalDate.of(2025,3,1));
 
-        assertEquals(BigDecimal.ZERO,
+        assertEquals(0,
                 response.getCustomerResponse().get(0).getTotalRewards());
     }
 
@@ -123,5 +123,50 @@ class RewardsServiceTest {
                 rewardsService.getRewards(
                         LocalDate.of(2025,1,1),
                         LocalDate.of(2025,6,1)));
+    }
+    
+    @Test
+    void testFractionalTransactionAmount() {
+
+        BigDecimal amount = new BigDecimal("120.75");
+
+        Transaction transaction = new Transaction();
+        transaction.setAmount(amount);
+        transaction.setTransactionDate(LocalDate.of(2025, 1, 10));
+        transaction.setCustomer(new Customer(1L, "John","2435355225","Bangalore"));
+
+        when(transactionRepository.findByTransactionDateBetween(any(), any()))
+                .thenReturn(List.of(transaction));
+
+        RewardResponse response =
+                rewardsService.getRewards(
+                        LocalDate.of(2025,1,1),
+                        LocalDate.of(2025,3,1)
+                );
+
+        double total = response.getCustomerResponse()
+                               .get(0)
+                               .getTotalRewards();
+
+        assertEquals(91.5, total);
+    }
+    @Test
+    void testMoreThanThreeMonthsRange() {
+
+        LocalDate start = LocalDate.of(2025, 1, 1);
+        LocalDate end = LocalDate.of(2025, 5, 1);
+
+        assertThrows(InvalidDateException.class,
+                () -> rewardsService.getRewards(start, end));
+    }
+    
+    @Test
+    void testStartDateAfterEndDate() {
+
+        LocalDate start = LocalDate.of(2025, 3, 1);
+        LocalDate end = LocalDate.of(2025, 1, 1);
+
+        assertThrows(InvalidDateException.class,
+                () -> rewardsService.getRewards(start, end));
     }
 }

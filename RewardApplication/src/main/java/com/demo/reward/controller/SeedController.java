@@ -57,7 +57,7 @@ public class SeedController {
                 c2
         );
 
-        transactionRepository.saveAll(List.of(t1));
+        transactionRepository.saveAll(List.of(t1,t2,t3));
 
         return "Data Seeded Successfully!";
     }
