@@ -1,0 +1,50 @@
+This is a sample Java/Maven/Spring Boot application which provides RESTful services. It can be used as a starter project.
+
+**Prerequisites**
+
+Before diving in, ensure you have the following:
+
+Java Development Kit (JDK): Download the latest version from the [Oracle JDK Downloads].
+
+Postman: Install Postman to test the APIs from the [Postman Downloads].
+
+**Installation Instructions**
+
+You can import the project as a Maven application into your favorite IDE. I tested it using Spring Tool Suite 5.0.1.
+
+If Lombok causes issues, refer to the [Lombok Installation Guide] to install it using the jar file.
+
+Running the Application
+
+Use one of the following ways to run the Spring Boot application:
+
+Using Maven:
+
+mvn clean package
+java -jar RewardApplication-0.0.1-SNAPSHOT.jar
+
+On Unix/Linux Systems:
+
+mvn clean package
+./RewardApplication-0.0.1-SNAPSHOT.jar
+Testing the Application
+1. Seed Data
+curl -X POST http://localhost:8081/api/v1/seed
+
+Response:
+
+Data Seeded Successfully!
+2. Calculate Reward Points
+curl -X GET "http://localhost:8081/api/v1/rewards/calculate?startDate=${startDate}&endDate=${endDate}" \
+-H "Content-Type: application/json"
+
+Sample Response:
+
+{"customerResponse":[{"customerId":3,"customerName":"Meena","monthlyRewards":{"JANUARY":90.0,"FEBRUARY":25.0},"totalRewards":115.0},{"customerId":33,"customerName":"John","monthlyRewards":{"JANUARY":90.0},"totalRewards":90.0},{"customerId":4,"customerName":"Ravi","monthlyRewards":{"JANUARY":250.0},"totalRewards":250.0},{"customerId":1,"customerName":"Meena","monthlyRewards":{"JANUARY":90.0,"FEBRUARY":25.0},"totalRewards":115.0},{"customerId":2,"customerName":"Ravi","monthlyRewards":{"JANUARY":250.0},"totalRewards":250.0}]}
+
+
+- [Reference Links](#reference-links)
+
+That’s it ✅ GitHub automatically makes them clickable.
+
+If you want, paste your full README here — I will structure it properly with professional navigation formatting for your project.
