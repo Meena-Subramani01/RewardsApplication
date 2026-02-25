@@ -1,4 +1,4 @@
-This is a sample Java/Maven/Spring Boot application which provides RESTful services. It can be used as a starter project.
+This is a sample Java/Maven/Spring Boot application which provides RESTful services to calculate the rewards poinnts for the customer. It can be used as a starter project.
 
 **Prerequisites**
 
