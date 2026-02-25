@@ -1,42 +1,31 @@
-# Reward Application
+This is a sample Java/Maven/Spring Boot application which provides RESTful services. It can be used as a starter project.
 
-##Description
+**Prerequisites**
 
-This Spring Boot application calculates reward points for customers based on their transactions within a given date range.
+Before diving in, ensure you have the following:
 
-The API supports:
--Reward calculation per customer
--Monthly reward breakdown
--Total reward calculation
--Date range validation (maximum 3 months)
--Global exception handling
+Java Development Kit (JDK): Download the latest version from the https://www.oracle.com/in/java/technologies/downloads/.
 
-##Reward Points Logic
--2 points for every dollar spent above $100
--1 point for every dollar spent between $50 and $100
--No points for amounts below $50
+Postman: Install Postman to test the APIs from the https://www.postman.com/downloads/.
 
-Example:
-If transaction amount = $120
-	(120 − 100) × 2 = 40
-	(100 − 50) × 1 = 50
-	Total = 90 points
-	
-If transaction amount = $120.75
-	(120.75 − 100) × 2 = 41.5
-	50
-	Total = 91.5 points
-	
-##Tech Stack
--Java 17
--Spring Boot 3.2.5
--Spring Data JPA
--H2 In-Memory Database
--Maven
--JUnit 5
--Mockito
+**Installation Instructions**
 
-#Project Structure
+You can import the project as a Maven application into your favorite IDE. I tested it using Spring Tool Suite 5.0.1.
+
+If Lombok causes issues, refer to the https://stackoverflow.com/questions/56523530/lombok-installation-in-spring-tool-suite-4-for-windows to install it using the jar file.
+
+**Running the Application**
+
+Use one of the following ways to run the Spring Boot application:
+
+Using Maven:
+  mvn clean package
+  java -jar RewardApplication-0.0.1-SNAPSHOT.jar
+
+On Unix/Linux Systems:
+  mvn clean package./RewardApplication-0.0.1-SNAPSHOT.jar
+
+**#Project Structure**
 src/main/java/com/demo/reward
  ├── controller
  ├── service
@@ -48,38 +37,25 @@ src/main/java/com/demo/reward
 src/test/java/com/demo/reward
  ├── testcontroller
  └── testservice
- 
- ##Api details
- Calculate Rewards
- /api/v1/rewards/calculate?startDate=2025-01-01&endDate=2025-03-31
- 
-# Validation Rules
--Start date must not be after end date
--Date range must not exceed 3 months
--Transactions must exist in given date range
 
-#Sample Response
-{
-  "customerResponse": [
-    {
-      "customerId": 1,
-      "customerName": "Meena",
-      "monthlyRewards": {
-        "JANUARY": 90
-      },
-      "totalRewards": 90
-    }
-  ]
-}
+**##Tech Stack**
+-Java 17
+-Spring Boot 3.2.5
+-Spring Data JPA
+-H2 In-Memory Database
+-Maven
+-JUnit 5
+-Mockito
 
-##Running Application
--Clean and Compile
-	mvn clean compile
--Run Application
-	mvn spring-boot:run
--Application Runs at
-	http://localhost:8081
--Running Test
-	mvn test
--Run clean build with test
-	mvn clean install
+**Testing the Application**
+1. Seed Data
+    curl -X POST http://localhost:8081/api/v1/seed
+
+Response:
+    Data Seeded Successfully!
+2. Calculate Reward Points
+  curl -X GET "http://localhost:8081/api/v1/rewards/calculate?startDate=${startDate}&endDate=${endDate}" \
+-H "Content-Type: application/json"
+
+Sample Response:
+{"customerResponse":[{"customerId":3,"customerName":"Meena","monthlyRewards":{"JANUARY":90.0,"FEBRUARY":25.0},"totalRewards":115.0},{"customerId":33,"customerName":"John","monthlyRewards":{"JANUARY":90.0},"totalRewards":90.0},{"customerId":4,"customerName":"Ravi","monthlyRewards":{"JANUARY":250.0},"totalRewards":250.0},{"customerId":1,"customerName":"Meena","monthlyRewards":{"JANUARY":90.0,"FEBRUARY":25.0},"totalRewards":115.0},{"customerId":2,"customerName":"Ravi","monthlyRewards":{"JANUARY":250.0},"totalRewards":250.0}]}
