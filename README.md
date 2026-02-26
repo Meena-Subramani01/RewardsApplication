@@ -38,7 +38,7 @@ src/test/java/com/demo/reward
  ├── testcontroller
  └── testservice
 
-**##Tech Stack**
+**##Built With**
 -Java 17
 -Spring Boot 3.2.5
 -Spring Data JPA
