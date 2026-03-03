@@ -22,7 +22,6 @@ Use one of the following ways to run the Spring Boot application:
 - Using Maven: mvn clean package java -jar RewardApplication-0.0.1-SNAPSHOT.jar
 - On Unix/Linux Systems: mvn clean package./RewardApplication-0.0.1-SNAPSHOT.jar
 ----
-
 ##Project Structure##
 
 src/main/java/com/demo/reward
@@ -38,7 +37,7 @@ src/test/java/com/demo/reward
  ├── testcontroller
  └── testservice
  ```
-
+----
 ##Built With##
 - Java 17
 - Spring Boot 3.2.5
