@@ -12,13 +12,6 @@ Before diving in, ensure you have the following:
 - Postman: Install Postman to test the APIs from the https://www.postman.com/downloads/
 ----
 
-##Installation Instructions##
-```
-- You can import the project as a Maven application into your favorite IDE. I tested it using Spring Tool Suite 5.0.1.
-- If Lombok causes issues, refer to the https://stackoverflow.com/questions/56523530/lombok-installation-in-spring-tool-suite-4-for-windows to install it using the jar file
-----
-
-
 ##Running the Application##
 ```
 Use one of the following ways to run the Spring Boot application:
