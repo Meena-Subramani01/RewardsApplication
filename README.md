@@ -10,7 +10,7 @@ This is a sample Java/Maven/Spring Boot application which provides RESTful servi
 Before diving in, ensure you have the following:
 - Java Development Kit (JDK): Download the latest version from the https://www.oracle.com/in/java/technologies/downloads/.
 - Postman: Install Postman to test the APIs from the https://www.postman.com/downloads/
-
+----
 
 ##Installation Instructions##
 ```
@@ -36,7 +36,6 @@ src/main/java/com/demo/reward
  ├── dto
  └── exception
 ```
-
 ```
 src/test/java/com/demo/reward
  ├── testcontroller
