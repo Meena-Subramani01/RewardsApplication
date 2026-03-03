@@ -4,13 +4,13 @@ This is a sample Java/Maven/Spring Boot application which provides RESTful servi
 - 2 points for every dollar spent above $100
 - 1 point for every dollar spent between $50 and $100
 - No points for amounts below $50
-
+----
 ##Prerequisites##
 ```
 Before diving in, ensure you have the following:
 - Java Development Kit (JDK): Download the latest version from the https://www.oracle.com/in/java/technologies/downloads/.
 - Postman: Install Postman to test the APIs from the https://www.postman.com/downloads/
-----
+
 
 ##Installation Instructions##
 ```
