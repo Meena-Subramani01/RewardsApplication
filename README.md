@@ -42,6 +42,7 @@ src/test/java/com/demo/reward
  ```
 
 ## Built With ##
+```
 - Java 17
 - Spring Boot 3.2.5
 - Spring Data JPA
@@ -50,9 +51,9 @@ src/test/java/com/demo/reward
 - JUnit 5
 - Mockito
 ```
-```
-## Testing the Application ##
 
+## Testing the Application ##
+```
 1. Seed Data
    - Endpoint : POST/api/v1/seed
    - Response:
