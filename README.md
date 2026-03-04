@@ -25,7 +25,7 @@ Use one of the following ways to run the Spring Boot application:
 - On Unix/Linux Systems: mvn clean package./RewardApplication-0.0.1-SNAPSHOT.jar
 ```
 ## Project Structure ##
-
+```
 src/main/java/com/demo/reward
  ├── controller
  ├── service
@@ -34,6 +34,7 @@ src/main/java/com/demo/reward
  ├── dto
  └── exception
 ```
+
 ```
 src/test/java/com/demo/reward
  ├── testcontroller
