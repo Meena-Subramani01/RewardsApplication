@@ -66,4 +66,13 @@ src/test/java/com/demo/reward
        startDate : Start date  in yyyy-MM-dd format.
        endDate: End date in yyyy-MM-dd format.
    - Sample Response:
-  {"customerResponse":[{"customerId":4,"customerName":"Ravi","monthlyRewards":{"JANUARY":250.0},"totalRewards":250.0},          {"customerId":33,"customerName":"John","monthlyRewards":    {"JANUARY":90.0},"totalRewards":90.0},{"customerId":1,"customerName":"Meena","monthlyRewards":{"JANUARY":90.0,"FEBRUARY":25.0},"totalRewards":115.0},{"customerId":2,"customerName":"Ravi","monthlyRewards":{"JANUARY":250.0},"totalRewards":250.0},{"customerId":3,"customerName":"Meena","monthlyRewards":{"JANUARY":90.0,"FEBRUARY":25.0},"totalRewards":115.0}]}
+  {
+    "customerResponse":
+    [
+      {"customerId":4,"customerName":"Ravi","monthlyRewards":{"JANUARY":250.0},"totalRewards":250.0},
+      {"customerId":33,"customerName":"John","monthlyRewards":{"JANUARY":90.0},"totalRewards":90.0},
+      {"customerId":1,"customerName":"Meena","monthlyRewards": {"JANUARY":90.0,"FEBRUARY":25.0},"totalRewards":115.0},
+      {"customerId":2,"customerName":"Ravi","monthlyRewards":{"JANUARY":250.0},"totalRewards":250.0},
+      {"customerId":3,"customerName":"Meena","monthlyRewards":{"JANUARY":90.0,"FEBRUARY":25.0},"totalRewards":115.0}
+    ]
+  }
