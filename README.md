@@ -33,7 +33,8 @@ src/main/java/com/demo/reward
  ├── entity
  ├── dto
  └── exception
-
+```
+```
 src/test/java/com/demo/reward
  ├── testcontroller
  └── testservice
