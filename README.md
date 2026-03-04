@@ -50,9 +50,9 @@ src/test/java/com/demo/reward
 - JUnit 5
 - Mockito
 ```
-
+```
 ## Testing the Application ##
-----
+
 1. Seed Data
    - Endpoint : POST/api/v1/seed
    - Response:
