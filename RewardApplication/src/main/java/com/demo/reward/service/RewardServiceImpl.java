@@ -22,14 +22,11 @@ import com.demo.reward.repository.TransactionRepository;
 public class RewardServiceImpl implements RewardService{
 
 	private final TransactionRepository transactionRepository;
-	private final CustomerService customerService;
 	
 	
 	@Autowired
-	public RewardServiceImpl(TransactionRepository transactionRepository, 
-			CustomerService customerService) {
+	public RewardServiceImpl(TransactionRepository transactionRepository) {
 		this.transactionRepository = transactionRepository;
-		this.customerService = customerService;
 	}
 	
 	@Override
