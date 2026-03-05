@@ -76,3 +76,15 @@ src/test/java/com/demo/reward
       {"customerId":3,"customerName":"Meena","monthlyRewards":{"JANUARY":90.0,"FEBRUARY":25.0},"totalRewards":115.0}
     ]
   }
+```
+## API Testing Screenshots ##
+```
+### Success Response
+![Success](doc/success_response _up.png)
+
+### Failure Response
+![Failure](doc/no_transasction_error.png)
+![Failure](doc/date_validation_error.png)
+
+### Test Case
+![TestCase](doc/test_case.png)
