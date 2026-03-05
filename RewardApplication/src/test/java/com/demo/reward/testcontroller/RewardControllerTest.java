@@ -44,9 +44,9 @@ public class RewardControllerTest {
 	    CustomerRewardResponse customerReward =
 	            new CustomerRewardResponse(
 	                    1L,
-	                    "Meena",
+	                    "John",
 	                    monthly,
-	                    (double) 90
+	                    (double) 120
 	            );
 
 	    
@@ -58,8 +58,8 @@ public class RewardControllerTest {
 	            .thenReturn(response);
 
 	    mockMvc.perform(get("/api/v1/rewards/calculate")
-	                    .param("startDate", "2025-01-01")
-	                    .param("endDate", "2025-03-01"))
+	                    .param("startDate", "2026-01-01")
+	                    .param("endDate", "2026-03-01"))
 	            .andExpect(status().isOk())
 	            .andExpect(jsonPath("$.customerResponse[0].customerId").value(1))
 	            .andExpect(jsonPath("$.customerResponse[0].totalRewards").value(90));
