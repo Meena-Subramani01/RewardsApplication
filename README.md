@@ -80,11 +80,11 @@ src/test/java/com/demo/reward
 ## API Testing Screenshots ##
 ```
 ### Success Response
-![Success](doc/success_response _up.png)
+![Success](docs/success_response _up.png)
 
 ### Failure Response
-![Failure](doc/no_transasction_error.png)
-![Failure](doc/date_validation_error.png)
+![Failure](docs/no_transasction_error.png)
+![Failure](docs/date_validation_error.png)
 
 ### Test Case
-![TestCase](doc/test_case.png)
+![TestCase](docs/test_case.png)
